@@ -5,8 +5,7 @@ for 5 rounds
     ask for user move
     generate random move
     compare moves to determine round winner or draw
-output winner as best 3 out of 5 unless there is a draw
-sudden death
+output winner unless there is a draw
 */
 
 // all returns in lowercase for consistency
@@ -54,3 +53,31 @@ function playRound (userSelection, computerSelection) {
         return (userSelection > computerSelection) ? USER_WIN : COMPUTER_WIN;
     }
 }
+
+function game(){
+    let roundResult;
+    let userWins = 0;
+    let computerWins = 0;
+
+    for(let i = 0; i < 5; ++i){
+        roundResult = playRound(getUserMove(), computerPlay());
+        if(roundResult == USER_WIN){
+            ++userWins;
+        }
+        else if (roundResult == COMPUTER_WIN){
+            ++computerWins;
+        }
+    }
+
+    if(userWins == computerWins){
+        alert("Draw!");
+    }
+    else if (userWins > computerWins){
+        alert("You win!");
+    }
+    else{
+        alert("You lose!");
+    }
+}
+
+game();
