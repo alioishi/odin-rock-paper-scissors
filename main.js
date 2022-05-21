@@ -28,12 +28,12 @@ function convertMoveStrToMoveInt(move) {
 function getUserMove() {
     let userMove = prompt("Rock, Paper, Scissors?");
     let userMoveCheck = userMove.toLowerCase();
-    if (userMoveCheck == "rock" || userMoveCheck == "paper" || userMoveCheck == "scissors"){
-        return convertMoveStrToMoveInt(userMoveCheck);
-    }
-    else{
+    while (userMoveCheck != "rock" && userMoveCheck != "paper" && userMoveCheck != "scissors"){
         console.log(`${userMove} is not valid.` );
+        userMove = prompt("Rock, Paper, Scissors?");
+        userMoveCheck = userMove.toLowerCase();
     }
+    return convertMoveStrToMoveInt(userMoveCheck);
 }
 
 function computerPlay() {
