@@ -1,13 +1,3 @@
-/*
-pseudocode
-
-for 5 rounds
-    ask for user move
-    generate random move
-    compare moves to determine round winner or draw
-output winner unless there is a draw
-*/
-
 // all returns in lowercase for consistency
 
 let ROCK_INT = 0;
@@ -49,17 +39,41 @@ function computerPlay() {
 }
 
 function playRound (userSelection, computerSelection) {
+    let result;
+
     if (userSelection == computerSelection){
-        return DRAW;
+        alert("This round is a tie.");
+        result = DRAW;
     }
-    else if (userSelection == SCISSORS){
-        return (computerSelection == ROCK) ? COMPUTER_WIN : USER_WIN;
+    else if (userSelection == SCISSORS_INT){
+        if (computerSelection == ROCK_INT){
+            alert("You lose this round. Rock beats scissors.");
+            result = COMPUTER_WIN;
+        }
+        else {
+            alert("You win this round. Scissors beats paper.");
+            result = USER_WIN;
+        }
     }
-    else if (computerSelection == SCISSORS){
-        return (userSelection == ROCK) ? USER_WIN : COMPUTER_WIN;
+    else if (computerSelection == SCISSORS_INT){
+        if (userSelection == ROCK_INT){
+            alert("You win this round. Rock beats scissors.");
+            result = USER_WIN;
+        }
+        else {
+            alert("You lose this round. Scissors beats paper.");
+            result = COMPUTER_WIN;
+        }
     }
     else {
-        return (userSelection > computerSelection) ? USER_WIN : COMPUTER_WIN;
+        if (userSelection > computerSelection){
+            alert(`You win this round. ${convertMoveIntToMoveStr(userSelection).slice(0,1).toUpperCase() + convertMoveIntToMoveStr(userSelection).slice(1)} beats ${convertMoveIntToMoveStr(computerSelection)}.`);
+            result = USER_WIN;
+        }
+        else{
+            alert(`You lose this round. ${convertMoveIntToMoveStr(computerSelection).slice(0,1).toUpperCase() + convertMoveIntToMoveStr(computerSelection).slice(1)} beats ${convertMoveIntToMoveStr(userSelection)}.`);
+            result = COMPUTER_WIN;
+        }
     }
 }
 
