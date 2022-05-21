@@ -10,24 +10,33 @@ output winner unless there is a draw
 
 // all returns in lowercase for consistency
 
-let ROCK = 0;
-let PAPER = 1;
-let SCISSORS = 2;
+let ROCK_INT = 0;
+let ROCK_STR = "rock";
+let PAPER_INT = 1;
+let PAPER_STR = "paper"
+let SCISSORS_INT = 2;
+let SCISSORS_STR = "scissors";
 
 let USER_WIN = 0;
 let COMPUTER_WIN = 1;
 let DRAW = 2;
 
-function convertMoveStrToMoveInt(move) {
-    return (move == "rock") ? ROCK :
-        (move == "paper") ? PAPER : 
-        SCISSORS;
+function convertMoveStrToMoveInt(moveStr) {
+    return (moveStr == ROCK_STR) ? ROCK_INT :
+        (moveStr == PAPER_STR) ? PAPER_INT : 
+        SCISSORS_INT;
+}
+
+function convertMoveIntToMoveStr(moveInt){
+    return (moveInt == ROCK_INT) ? ROCK_STR :
+    (moveInt == PAPER_INT) ? PAPER_STR : 
+    SCISSORS_STR;
 }
 
 function getUserMove() {
     let userMove = prompt("Rock, Paper, Scissors?");
     let userMoveCheck = userMove.toLowerCase();
-    while (userMoveCheck != "rock" && userMoveCheck != "paper" && userMoveCheck != "scissors"){
+    while (userMoveCheck != ROCK_STR && userMoveCheck != PAPER_STR && userMoveCheck != SCISSORS_STR){
         console.log(`${userMove} is not valid.` );
         userMove = prompt("Rock, Paper, Scissors?");
         userMoveCheck = userMove.toLowerCase();
