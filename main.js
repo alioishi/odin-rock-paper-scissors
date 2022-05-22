@@ -34,10 +34,18 @@ function getUserMove() {
     return convertMoveStrToMoveInt(userMoveCheck);
 }
 
+
+// generate 0, 1, or 2 to represent rock, paper, or scissors, respectively
 function computerPlay() {
     return computerMoveRNG = Math.floor(Math.random()*3);
 }
 
+/* 
+first check for tie, 
+then check the result if one of the user or the computer has scissors and the other has rock 
+        because the comparison is not as simple as the the remaining comparisons, 
+then check the remaining comparisons, which is a simple greater than comparison
+*/
 function playRound (userSelection, computerSelection) {
     let result;
 
@@ -45,25 +53,13 @@ function playRound (userSelection, computerSelection) {
         alert("This round is a tie.");
         result = DRAW;
     }
-    else if (userSelection == SCISSORS_INT){
-        if (computerSelection == ROCK_INT){
-            alert("You lose this round. Rock beats scissors.");
-            result = COMPUTER_WIN;
-        }
-        else {
-            alert("You win this round. Scissors beats paper.");
-            result = USER_WIN;
-        }
+    else if (userSelection == SCISSORS_INT && computerSelection == ROCK_INT){
+        alert("You lose this round. Rock beats scissors.");
+        result = COMPUTER_WIN;
     }
-    else if (computerSelection == SCISSORS_INT){
-        if (userSelection == ROCK_INT){
-            alert("You win this round. Rock beats scissors.");
-            result = USER_WIN;
-        }
-        else {
-            alert("You lose this round. Scissors beats paper.");
-            result = COMPUTER_WIN;
-        }
+    else if (computerSelection == SCISSORS_INT && userSelection == ROCK_INT){
+        alert("You win this round. Rock beats scissors.");
+        result = USER_WIN;
     }
     else {
         if (userSelection > computerSelection){
@@ -75,6 +71,8 @@ function playRound (userSelection, computerSelection) {
             result = COMPUTER_WIN;
         }
     }
+
+    return result;
 }
 
 function game(){
