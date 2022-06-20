@@ -49,29 +49,32 @@ then check the remaining comparisons, which is a simple greater than comparison
 */
 function playRound (userSelection, computerSelection) {
     let result;
+    const div = document.createElement('div');
 
     if (userSelection == computerSelection){
-        alert("This round is a tie.");
+        div.textContent = "This round is a tie.";
         result = DRAW;
     }
     else if (userSelection == SCISSORS_INT && computerSelection == ROCK_INT){
-        alert("You lose this round. Rock beats scissors.");
+        div.textContent = "You lose this round. Rock beats scissors.";
         result = COMPUTER_WIN;
     }
     else if (computerSelection == SCISSORS_INT && userSelection == ROCK_INT){
-        alert("You win this round. Rock beats scissors.");
+        div.textContent = "You win this round. Rock beats scissors.";
         result = USER_WIN;
     }
     else {
         if (userSelection > computerSelection){
-            alert(`You win this round. ${convertMoveIntToMoveStr(userSelection).slice(0,1).toUpperCase() + convertMoveIntToMoveStr(userSelection).slice(1)} beats ${convertMoveIntToMoveStr(computerSelection)}.`);
+            div.textContent = `You win this round. ${convertMoveIntToMoveStr(userSelection).slice(0,1).toUpperCase() + convertMoveIntToMoveStr(userSelection).slice(1)} beats ${convertMoveIntToMoveStr(computerSelection)}.`;
             result = USER_WIN;
         }
         else{
-            alert(`You lose this round. ${convertMoveIntToMoveStr(computerSelection).slice(0,1).toUpperCase() + convertMoveIntToMoveStr(computerSelection).slice(1)} beats ${convertMoveIntToMoveStr(userSelection)}.`);
+            div.textContent = `You lose this round. ${convertMoveIntToMoveStr(computerSelection).slice(0,1).toUpperCase() + convertMoveIntToMoveStr(computerSelection).slice(1)} beats ${convertMoveIntToMoveStr(userSelection)}.`;
             result = COMPUTER_WIN;
         }
     }
+
+    document.body.appendChild(div);
 
     return result;
 }
