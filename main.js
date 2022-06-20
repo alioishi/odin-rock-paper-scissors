@@ -23,6 +23,7 @@ function convertMoveIntToMoveStr(moveInt){
     SCISSORS_STR;
 }
 
+/*
 function getUserMove() {
     let userMove = prompt("Rock, Paper, Scissors?");
     let userMoveCheck = userMove.toLowerCase();
@@ -33,7 +34,7 @@ function getUserMove() {
     }
     return convertMoveStrToMoveInt(userMoveCheck);
 }
-
+*/
 
 // generate 0, 1, or 2 to represent rock, paper, or scissors, respectively
 function computerPlay() {
@@ -74,7 +75,7 @@ function playRound (userSelection, computerSelection) {
 
     return result;
 }
-
+ /*
 function game(){
     let roundResult;
     let userWins = 0;
@@ -102,3 +103,19 @@ function game(){
 }
 
 game();
+*/
+
+const rockBtn = document.querySelector("#rock-btn");
+rockBtn.addEventListener('click', function() {
+    playRound(ROCK_INT, computerPlay())
+});
+
+const paperBtn = document.querySelector("#paper-btn");
+paperBtn.addEventListener('click', function() {
+    playRound(PAPER_INT, computerPlay())
+});
+
+const scissorsBtn = document.querySelector("#scissors-btn");
+scissorsBtn.addEventListener('click', function() {
+    playRound(SCISSORS_INT, computerPlay())
+});
