@@ -7,9 +7,9 @@ let PAPER_STR = "paper"
 let SCISSORS_INT = 2;
 let SCISSORS_STR = "scissors";
 
-let USER_WIN = 0;
-let COMPUTER_WIN = 1;
-let DRAW = 2;
+let USER_WIN_COUNT = 0;
+let COMPUTER_WIN_COUNT = 0;
+let ROUND_COUNT = 0;
 
 function convertMoveStrToMoveInt(moveStr) {
     return (moveStr == ROCK_STR) ? ROCK_INT :
@@ -48,77 +48,77 @@ then check the result if one of the user or the computer has scissors and the ot
 then check the remaining comparisons, which is a simple greater than comparison
 */
 function playRound (userSelection, computerSelection) {
-    let result;
+    ++ROUND_COUNT;
+
     const div = document.createElement('div');
 
     if (userSelection == computerSelection){
         div.textContent = "This round is a tie.";
-        result = DRAW;
     }
     else if (userSelection == SCISSORS_INT && computerSelection == ROCK_INT){
         div.textContent = "You lose this round. Rock beats scissors.";
-        result = COMPUTER_WIN;
+        ++COMPUTER_WIN_COUNT;
     }
     else if (computerSelection == SCISSORS_INT && userSelection == ROCK_INT){
         div.textContent = "You win this round. Rock beats scissors.";
-        result = USER_WIN;
+        ++USER_WIN_COUNT;
     }
     else {
         if (userSelection > computerSelection){
             div.textContent = `You win this round. ${convertMoveIntToMoveStr(userSelection).slice(0,1).toUpperCase() + convertMoveIntToMoveStr(userSelection).slice(1)} beats ${convertMoveIntToMoveStr(computerSelection)}.`;
-            result = USER_WIN;
+            ++USER_WIN_COUNT;
         }
         else{
             div.textContent = `You lose this round. ${convertMoveIntToMoveStr(computerSelection).slice(0,1).toUpperCase() + convertMoveIntToMoveStr(computerSelection).slice(1)} beats ${convertMoveIntToMoveStr(userSelection)}.`;
-            result = COMPUTER_WIN;
+            ++COMPUTER_WIN_COUNT;
         }
     }
 
     document.body.appendChild(div);
-
-    return result;
-}
- /*
-function game(){
-    let roundResult;
-    let userWins = 0;
-    let computerWins = 0;
-
-    for(let i = 0; i < 5; ++i){
-        roundResult = playRound(getUserMove(), computerPlay());
-        if(roundResult == USER_WIN){
-            ++userWins;
-        }
-        else if (roundResult == COMPUTER_WIN){
-            ++computerWins;
-        }
-    }
-
-    if(userWins == computerWins){
-        alert("Draw!");
-    }
-    else if (userWins > computerWins){
-        alert("You win!");
-    }
-    else{
-        alert("You lose!");
-    }
 }
 
-game();
-*/
+function score(){
+    const div = document.createElement('div');
+
+    div.textContent = `Round ${ROUND_COUNT} Current Score: User-${USER_WIN_COUNT} Computer-${COMPUTER_WIN_COUNT}.`;
+    document.body.appendChild(div);
+
+    if(USER_WIN_COUNT == 5 || COMPUTER_WIN_COUNT == 5){
+        const done = document.createElement('div');
+        if(USER_WIN_COUNT == COMPUTER_WIN_COUNT){
+            done.textContent = `Draw! Final Score: User-${USER_WIN_COUNT} Computer-${COMPUTER_WIN_COUNT}.\n\n`;
+        }
+        else if (USER_WIN_COUNT > COMPUTER_WIN_COUNT){
+            done.textContent = `You win! Final Score: User-${USER_WIN_COUNT} Computer-${COMPUTER_WIN_COUNT}.\n\n`;
+        }
+        else{
+            done.textContent = `You lose! Final Score: User-${USER_WIN_COUNT} Computer-${COMPUTER_WIN_COUNT}.\n\n`;
+        }
+        document.body.appendChild(done);
+
+        const newline = document.createElement('br');
+        document.body.appendChild(newline);
+
+        USER_WIN_COUNT = 0;
+        COMPUTER_WIN_COUNT = 0;
+        ROUND_COUNT = 0;
+    }
+}
 
 const rockBtn = document.querySelector("#rock-btn");
 rockBtn.addEventListener('click', function() {
-    playRound(ROCK_INT, computerPlay())
+    playRound(ROCK_INT, computerPlay());
+    score();
 });
 
 const paperBtn = document.querySelector("#paper-btn");
 paperBtn.addEventListener('click', function() {
-    playRound(PAPER_INT, computerPlay())
+    playRound(PAPER_INT, computerPlay());
+    score();
 });
 
 const scissorsBtn = document.querySelector("#scissors-btn");
 scissorsBtn.addEventListener('click', function() {
-    playRound(SCISSORS_INT, computerPlay())
+    playRound(SCISSORS_INT, computerPlay());
+    score();
 });
