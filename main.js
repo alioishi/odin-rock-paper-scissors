@@ -11,30 +11,11 @@ let USER_WIN_COUNT = 0;
 let COMPUTER_WIN_COUNT = 0;
 let ROUND_COUNT = 0;
 
-function convertMoveStrToMoveInt(moveStr) {
-    return (moveStr == ROCK_STR) ? ROCK_INT :
-        (moveStr == PAPER_STR) ? PAPER_INT : 
-        SCISSORS_INT;
-}
-
 function convertMoveIntToMoveStr(moveInt){
     return (moveInt == ROCK_INT) ? ROCK_STR :
     (moveInt == PAPER_INT) ? PAPER_STR : 
     SCISSORS_STR;
 }
-
-/*
-function getUserMove() {
-    let userMove = prompt("Rock, Paper, Scissors?");
-    let userMoveCheck = userMove.toLowerCase();
-    while (userMoveCheck != ROCK_STR && userMoveCheck != PAPER_STR && userMoveCheck != SCISSORS_STR){
-        console.log(`${userMove} is not valid.` );
-        userMove = prompt("Rock, Paper, Scissors?");
-        userMoveCheck = userMove.toLowerCase();
-    }
-    return convertMoveStrToMoveInt(userMoveCheck);
-}
-*/
 
 // generate 0, 1, or 2 to represent rock, paper, or scissors, respectively
 function computerPlay() {
@@ -85,10 +66,7 @@ function score(){
 
     if(USER_WIN_COUNT == 5 || COMPUTER_WIN_COUNT == 5){
         const done = document.createElement('div');
-        if(USER_WIN_COUNT == COMPUTER_WIN_COUNT){
-            done.textContent = `Draw! Final Score: User-${USER_WIN_COUNT} Computer-${COMPUTER_WIN_COUNT}.\n\n`;
-        }
-        else if (USER_WIN_COUNT > COMPUTER_WIN_COUNT){
+        if(USER_WIN_COUNT > COMPUTER_WIN_COUNT){
             done.textContent = `You win! Final Score: User-${USER_WIN_COUNT} Computer-${COMPUTER_WIN_COUNT}.\n\n`;
         }
         else{
